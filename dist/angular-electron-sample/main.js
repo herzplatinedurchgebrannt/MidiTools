@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexandermathieu/Coding/Electron/angular-electron-sample/src/main.ts */"zUnb");
+module.exports = __webpack_require__(/*! /Users/alexandermathieu/Coding/Electron/MidiTools/src/main.ts */"zUnb");
 
 
 /***/ }),

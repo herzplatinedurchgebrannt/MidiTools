@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/alexandermathieu/Coding/Electron/angular-electron-sample/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/alexandermathieu/Coding/Electron/MidiTools/src/polyfills.ts */"hN/g");
 
 
 /***/ }),

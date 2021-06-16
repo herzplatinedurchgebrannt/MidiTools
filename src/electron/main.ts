@@ -3,9 +3,18 @@ import * as fs from 'fs';
 import { Midi } from '@tonejs/midi'
 import {inputById, MIDI_INPUT, MIDI_OUTPUT, outputByName} from '@ng-web-apis/midi';
 
+class MidiFile 
+{
+  path: string;
+  pathMidi: string;
+  pathTab: string;
+}
+
+var test: MidiFile = new MidiFile();
+var openFile = false;
+
 class Pattern
 {
-  // 
   name: string;
   id: number;
   tuning: string[];
@@ -46,13 +55,14 @@ function createWindow () {
       nodeIntegration: true
     }
   });
-
   mainWindow.loadFile('index.html');
 }
 
 app.whenReady().then(() => {
   createWindow();
 });
+//var test = new MidiFile();
+
 
 function sendMiddleC( midiAccess, portID ) {
   var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
@@ -84,15 +94,30 @@ ipcMain.on('selectPirate', async (event: Electron.IpcMainEvent, name: string) =>
 // Electron -> Angular
 ipcMain.handle('readTab', async () => {
 
-  let oFile = dialog.showOpenDialog({ 
-    properties: ['openFile','multiSelections'], 
-    title:"Hier könnte Ihre Werbung stehen!" , 
-    defaultPath: "./src/assets/", 
-    buttonLabel: "Convert",
-    filters: [ { name: 'Tab', extensions: ['txt'] }]});
+  var result: any;
+  console.log("lalala" + openFile)
 
+  console.log(test)
+  if (openFile == true){
+    result = fs.readFileSync(test.pathTab,'utf8');
+    openFile = false;
+    console.log("if")
+  }
+  else {
+    let oFile = dialog.showOpenDialog({ 
+      properties: ['openFile','multiSelections'], 
+      title:"Hier könnte Ihre Werbung stehen!" , 
+      defaultPath: "./src/assets/", 
+      buttonLabel: "Convert",
+      filters: [ { name: 'Tab', extensions: ['txt'] }]});
+  
     let filePath:string[] = (await oFile).filePaths;
-    const result = fs.readFileSync(filePath[0],'utf8');
+  
+  
+    result = fs.readFileSync(filePath[0],'utf8');
+    console.log("else")
+  }
+
 
   return result;
 });
@@ -278,6 +303,8 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
 
   let songName = name;
 
+  
+
   // notes on strings
   let stringG: string = "";
   let stringD: string = "";
@@ -357,6 +384,7 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
 
   // iterate selected files
   filePath.forEach(file => {
+
     
     // get file name
     let fileName: string = file.replace(/^.*[\\\/]/, '');
@@ -367,6 +395,15 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
     // create Midi file
     let midiData = fs.readFileSync(file);
     let mFile = new Midi(midiData);
+
+    /*
+    var midiFile = new MidiFile();
+    midiFile.path = filePath;
+    midiFile.pathMidi = filePath + fileName;*/
+
+    test.path = filePath;
+    test.pathMidi = filePath + fileName;
+
 
     // midi file data
     let midiBpm = mFile.header.tempos[0].bpm;
@@ -455,6 +492,12 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
       // write the stream
       // header
       var stream = fs.createWriteStream(filePath+fileName.replace(".mid","_TAB.txt"));
+
+      //midiFile.pathTab = filePath+fileName.replace(".mid","_TAB.txt");
+      test.pathTab = filePath+fileName.replace(".mid","_TAB.txt");
+
+
+      //console.log(midiFile);
     
       stream.write("");
     
@@ -574,6 +617,7 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
           
           counter = 0;
           schreiben = false;
+          openFile = true;
           
         }
         

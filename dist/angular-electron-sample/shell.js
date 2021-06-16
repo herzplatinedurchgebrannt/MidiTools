@@ -2650,6 +2650,10 @@ var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _argume
 
 
 
+class MidiFile {
+}
+var test = new MidiFile();
+var openFile = false;
 class Pattern {
     constructor(id) {
         this.id = id;
@@ -2673,6 +2677,7 @@ function createWindow() {
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].whenReady().then(() => {
     createWindow();
 });
+//var test = new MidiFile();
 function sendMiddleC(midiAccess, portID) {
     var noteOnMessage = [0x90, 60, 0x7f]; // note on, middle C, full velocity
     var output = midiAccess.outputs.get(portID);
@@ -2697,15 +2702,26 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('selectPirate', (event, name
 }));
 // Electron -> Angular
 electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].handle('readTab', () => __awaiter(void 0, void 0, void 0, function* () {
-    let oFile = electron__WEBPACK_IMPORTED_MODULE_0__["dialog"].showOpenDialog({
-        properties: ['openFile', 'multiSelections'],
-        title: "Hier könnte Ihre Werbung stehen!",
-        defaultPath: "./src/assets/",
-        buttonLabel: "Convert",
-        filters: [{ name: 'Tab', extensions: ['txt'] }]
-    });
-    let filePath = (yield oFile).filePaths;
-    const result = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](filePath[0], 'utf8');
+    var result;
+    console.log("lalala" + openFile);
+    console.log(test);
+    if (openFile == true) {
+        result = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](test.pathTab, 'utf8');
+        openFile = false;
+        console.log("if");
+    }
+    else {
+        let oFile = electron__WEBPACK_IMPORTED_MODULE_0__["dialog"].showOpenDialog({
+            properties: ['openFile', 'multiSelections'],
+            title: "Hier könnte Ihre Werbung stehen!",
+            defaultPath: "./src/assets/",
+            buttonLabel: "Convert",
+            filters: [{ name: 'Tab', extensions: ['txt'] }]
+        });
+        let filePath = (yield oFile).filePaths;
+        result = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](filePath[0], 'utf8');
+        console.log("else");
+    }
     return result;
 }));
 electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('angToElec', (event, name) => __awaiter(void 0, void 0, void 0, function* () {
@@ -2905,6 +2921,12 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
         // create Midi file
         let midiData = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](file);
         let mFile = new _tonejs_midi__WEBPACK_IMPORTED_MODULE_2__["Midi"](midiData);
+        /*
+        var midiFile = new MidiFile();
+        midiFile.path = filePath;
+        midiFile.pathMidi = filePath + fileName;*/
+        test.path = filePath;
+        test.pathMidi = filePath + fileName;
         // midi file data
         let midiBpm = mFile.header.tempos[0].bpm;
         let midiTicks = mFile.header.tempos[0].ticks;
@@ -2977,6 +2999,9 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
         // write the stream
         // header
         var stream = fs__WEBPACK_IMPORTED_MODULE_1__["createWriteStream"](filePath + fileName.replace(".mid", "_TAB.txt"));
+        //midiFile.pathTab = filePath+fileName.replace(".mid","_TAB.txt");
+        test.pathTab = filePath + fileName.replace(".mid", "_TAB.txt");
+        //console.log(midiFile);
         stream.write("");
         stream.write(newLine);
         stream.write("Song: " + songName + newLine);
@@ -3064,6 +3089,7 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
                 }
                 counter = 0;
                 schreiben = false;
+                openFile = true;
             }
         }
         /*
