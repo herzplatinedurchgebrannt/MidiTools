@@ -5,6 +5,7 @@ import {inputById, MIDI_INPUT, MIDI_OUTPUT, outputByName} from '@ng-web-apis/mid
 
 class Pattern
 {
+  // 
   name: string;
   id: number;
   tuning: string[];
