@@ -1,0 +1,38 @@
+{
+    "Test":[
+        {"instrument":"Test1","original": 60,"replace": 70},
+        {"instrument":"Test2","original": 64,"replace": 74},
+        {"instrument":"Test3","original": 67,"replace": 77},
+        {"instrument":"Kick","original": 36,"replace": 6},
+        {"instrument":"Snare","original": 38,"replace": 12},
+        {"instrument":"HiHatOpen","original": 46,"replace": 26},
+        {"instrument":"CrashLeft","original": 49,"replace": 45},
+        {"instrument":"CrashRight","original": 57,"replace": 47},
+        {"instrument":"HiHatClosed","original": 42,"replace": 23},
+        {"instrument":"TomLow","original": 48,"replace": 41},
+        {"instrument":"TomMiddle","original": 50,"replace": 38},
+        {"instrument":"TomFloor","original": 43,"replace": 41}
+    ],  
+    "SSD_2_GGD":[
+        {"instrument":"Kick","original": 36,"replace": 24},
+        {"instrument":"Snare","original": 38,"replace": 26},
+        {"instrument":"HiHatOpen","original": 46,"replace": 26},
+        {"instrument":"CrashLeft","original": 57,"replace": 56},
+        {"instrument":"CrashRight","original": 55,"replace": 54},
+        {"instrument":"HiHatClosed","original": 42,"replace": 23},
+        {"instrument":"TomLow","original": 48,"replace": 41},
+        {"instrument":"TomMiddle","original": 50,"replace": 38},
+        {"instrument":"TomFloor","original": 43,"replace": 41}
+    ],
+    "preset3":[
+        {"instrument":"Kick","original": 36,"replace": 6},
+        {"instrument":"Snare","original": 38,"replace": 12},
+        {"instrument":"HiHatOpen","original": 46,"replace": 26},
+        {"instrument":"CrashLeft","original": 49,"replace": 45},
+        {"instrument":"CrashRight","original": 57,"replace": 47},
+        {"instrument":"HiHatClosed","original": 42,"replace": 23},
+        {"instrument":"TomLow","original": 48,"replace": 41},
+        {"instrument":"TomMiddle","original": 50,"replace": 38},
+        {"instrument":"TomFloor","original": 43,"replace": 41}
+    ]
+}

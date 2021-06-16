@@ -1,0 +1,10 @@
+
+Song: Songname
+Data: /Users/alexandermathieu/Coding/Electron/angular-electron-sample/src/assets/Bass2.mid
+Tuning: Dropped D [ D, A, D, G ]
+BPM: 120.00
+8.6.2021, 17:06:01
+
+-----------------------------------
+
+hallo
