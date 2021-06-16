@@ -34,23 +34,16 @@ class Pattern
   {
     this.id = id;
   }
-  buildPattern /*(stringE: string, stringA: string, stringD: string, stringG: string)*/() {
-
+  buildPattern() 
+  {
     this.pattern = this.notesStringG + "\r\n" + this.notesStringD + "\r\n" + this.notesStringA + "\r\n" + this.notesStringE;
-    
-  }
-
-  
+  }  
 }
-
-
-//import log from 'electron-log';
-//log.info(`${app.name} ${app.getVersion()}`);
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 600,
-    height: 800,
+    height: 1000,
     webPreferences: {
       nodeIntegration: true
     }
@@ -61,24 +54,17 @@ function createWindow () {
 app.whenReady().then(() => {
   createWindow();
 });
-//var test = new MidiFile();
-
 
 function sendMiddleC( midiAccess, portID ) {
   var noteOnMessage = [0x90, 60, 0x7f];    // note on, middle C, full velocity
   var output = midiAccess.outputs.get(portID);
   output.send( noteOnMessage );  //omitting the timestamp means send immediately.
   output.send( [0x80, 60, 0x40], window.performance.now() + 1000.0 ); // Inlined array creation- note off, middle C,  
-                                                                      // release velocity = 64, timestamp = now + 1000ms.
+                                                              // release velocity = 64, timestamp = now + 1000ms.
 }
-
 
 // Electron -> Angular
 ipcMain.handle('getPirates', () => {
-  /*fs.appendFile('mynewfile3.txt', 'Hello content!', function (err) {
-    if (err) throw err;
-    //console.log('Saved!');
-  });*/
   const result = fs.readFileSync(__dirname + '/assets/pirates.json');
   return JSON.parse(result.toString());
 });
@@ -86,16 +72,13 @@ ipcMain.handle('getPirates', () => {
 // Angular -> Electron
 ipcMain.on('selectPirate', async (event: Electron.IpcMainEvent, name: string) => {
     await dialog.showMessageBox({ message: 'You selected: ' + name });
-  //  console.log("jaaa");
     event.returnValue = true;
 });
-
 
 // Electron -> Angular
 ipcMain.handle('readTab', async () => {
 
   var result: any;
-  console.log("lalala" + openFile)
 
   console.log(test)
   if (openFile == true){
@@ -103,7 +86,8 @@ ipcMain.handle('readTab', async () => {
     openFile = false;
     console.log("if")
   }
-  else {
+  else 
+  {
     let oFile = dialog.showOpenDialog({ 
       properties: ['openFile','multiSelections'], 
       title:"Hier könnte Ihre Werbung stehen!" , 
@@ -113,17 +97,11 @@ ipcMain.handle('readTab', async () => {
   
     let filePath:string[] = (await oFile).filePaths;
   
-  
     result = fs.readFileSync(filePath[0],'utf8');
     console.log("else")
   }
-
-
   return result;
 });
-
-
-
 
 
 ipcMain.on('angToElec', async (event: Electron.IpcMainEvent, name: string) => {
@@ -155,11 +133,6 @@ ipcMain.on('angToElec', async (event: Electron.IpcMainEvent, name: string) => {
   console.log("Midi File written 2!");
   event.returnValue = true;
 });
-
-
-
-
-
 
 
 ipcMain.on('midiRead', async (event: Electron.IpcMainEvent, name: string) => {
@@ -194,7 +167,6 @@ ipcMain.on('midiRead', async (event: Electron.IpcMainEvent, name: string) => {
                           [43,41,"TomFloor"]
                         ];*/
 
-
   // iterate selected files
   filePath.forEach(file => {
     
@@ -227,19 +199,9 @@ ipcMain.on('midiRead', async (event: Electron.IpcMainEvent, name: string) => {
     // write new midi file
     fs.writeFileSync(path + newName, new Buffer(mFile.toArray()));
     console.log(newName + ": file written")
-
-     newName = "";
+    newName = "";
 
   });
-
-
-
-
-
-
-
-
-  //////////////////////////////////
 
   // zeigt alle Presets an
   var outputArray = [];  
@@ -248,62 +210,13 @@ ipcMain.on('midiRead', async (event: Electron.IpcMainEvent, name: string) => {
         preset: element,   
     });  
   }  
-  //console.log(outputArray)  
-
-  ////////////////////////////////////
-
-
-  //let midiData = fs.readFileSync(filePath[0]);
-  //const midiData2 = fs.readFileSync("./src/assets/piano.mid");
-  //const mFile = new Midi(midiData);
-
-
-
-
-/*
-
-  let trackNotes = mFile.tracks[0].notes;
-
-  let a: number = 0;
-  let b: number = 0;
-
-  trackNotes.forEach(element => {
-
-    noteReplace.forEach(element => {
-
-      if (noteReplace[b][0] == trackNotes[a].midi) {
-
-        var newNote :number = Number(noteReplace[b][1]);
-        
-        trackNotes[a].midi = newNote;
-        
-        //console.log(trackNotes[a])
-      }
-      b += 1;
-    });
-  a += 1;
-  b = 0;
-  });
-
-  let newName: string = mFile.name.replace(".mid", "");
-
-  fs.writeFileSync(newName + "_mod.mid", new Buffer(mFile.toArray()))
-  */
-
   event.returnValue = true;
 });
 
 
-
-
-
-
 ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning: string, sortPattern: boolean) => {
-  console.log(sortPattern);
 
   let songName = name;
-
-  
 
   // notes on strings
   let stringG: string = "";
@@ -358,7 +271,6 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
       break;
   
     default:
-
       break;
   }
 
@@ -385,7 +297,6 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
   // iterate selected files
   filePath.forEach(file => {
 
-    
     // get file name
     let fileName: string = file.replace(/^.*[\\\/]/, '');
 
@@ -396,14 +307,8 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
     let midiData = fs.readFileSync(file);
     let mFile = new Midi(midiData);
 
-    /*
-    var midiFile = new MidiFile();
-    midiFile.path = filePath;
-    midiFile.pathMidi = filePath + fileName;*/
-
     test.path = filePath;
     test.pathMidi = filePath + fileName;
-
 
     // midi file data
     let midiBpm = mFile.header.tempos[0].bpm;
@@ -419,7 +324,10 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
     let trackNotesNew = mFile.tracks[0].notes;
 
     // iterate midi notes
-    trackNotesNew.forEach(note => {
+    //trackNotesNew.forEach(note => {
+      for (let i = 0; i < trackNotesNew.length; i++){
+
+      
 /*    
       console.log("_____")
       console.log(note.bars);*/
@@ -435,46 +343,68 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
       var filler: string = "";
       var fillerNote: string ="";
 
-      if (Number.isInteger(note.bars) /*&& note.bars > 1 */ && Number.isInteger(note.bars/2)){
+      var checkBars: boolean = false;
+
+      // check if bar is full
+      if (Number.isInteger(trackNotesNew[i].bars) /*&& note.bars > 1 */ && Number.isInteger(trackNotesNew[i].bars/2))
+      {
+        checkBars = true;
+      }
+
+      // filter 
+      var zahl = trackNotesNew[i].bars.toFixed(0);
+      console.log(trackNotesNew[i].bars)
+
+      if ( Number.isInteger(trackNotesNew[i].bars/2)){
+      }
+
+
+
+
+      //console.log(trackNotesNew[i].bars.toFixed(0));
+
+      if (checkBars == true)
+      {
         filler = "|---";
         fillerNote = "|-";
       }
       else {
         filler = "--";
         fillerNote = "";
+        checkBars = false;
       }
 
-      if (notesE.slice(0,5).includes(note.midi))
+      if (notesE.slice(0,5).includes(trackNotesNew[i].midi))
       {
         //console.log("found");
         stringG += filler;
         stringD += filler;
         stringA += filler;
-        stringE += fillerNote + notesE.indexOf(note.midi)+"-";
+        stringE += fillerNote + notesE.indexOf(trackNotesNew[i].midi)+"-";
         //console.log(stringE);
       }
-      else if (notesA.slice(0,5).includes(note.midi))
+      else if (notesA.slice(0,5).includes(trackNotesNew[i].midi))
       {
         //console.log("found");
         stringG += filler;
         stringD += filler;
-        stringA += fillerNote + notesA.indexOf(note.midi)+"-";
+        stringA += fillerNote + notesA.indexOf(trackNotesNew[i].midi)+"-";
         stringE += filler;
         //console.log(stringA);
       }
-      else if (notesD.slice(0,5).includes(note.midi))
+      else if (notesD.slice(0,5).includes(trackNotesNew[i].midi))
       {
         //console.log("found");
         stringG += filler;
-        stringD += fillerNote + notesD.indexOf(note.midi)+"-";
+        stringD += fillerNote + notesD.indexOf(trackNotesNew[i].midi)+"-";
         stringA += filler;
         stringE += filler;
         //console.log(stringD);
       }
-      else if (notesG.slice(0,11).includes(note.midi))
+      else if (notesG.slice(0,11).includes(trackNotesNew[i].midi))
       {
         //console.log("found");
-        stringG += fillerNote + notesG.indexOf(note.midi)+"-";
+        stringG += fillerNote + notesG.indexOf(trackNotesNew[i].midi)+"-";
         stringD += filler;
         stringA += filler;
         stringE += filler;
@@ -485,7 +415,7 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
         console.log("note not on Bass fretboard");
       }
       
-      });
+    }
 
       const heute = new Date();
 

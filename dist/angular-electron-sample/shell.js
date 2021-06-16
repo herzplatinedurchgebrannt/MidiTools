@@ -2658,16 +2658,14 @@ class Pattern {
     constructor(id) {
         this.id = id;
     }
-    buildPattern /*(stringE: string, stringA: string, stringD: string, stringG: string)*/() {
+    buildPattern() {
         this.pattern = this.notesStringG + "\r\n" + this.notesStringD + "\r\n" + this.notesStringA + "\r\n" + this.notesStringE;
     }
 }
-//import log from 'electron-log';
-//log.info(`${app.name} ${app.getVersion()}`);
 function createWindow() {
     const mainWindow = new electron__WEBPACK_IMPORTED_MODULE_0__["BrowserWindow"]({
         width: 600,
-        height: 800,
+        height: 1000,
         webPreferences: {
             nodeIntegration: true
         }
@@ -2677,7 +2675,6 @@ function createWindow() {
 electron__WEBPACK_IMPORTED_MODULE_0__["app"].whenReady().then(() => {
     createWindow();
 });
-//var test = new MidiFile();
 function sendMiddleC(midiAccess, portID) {
     var noteOnMessage = [0x90, 60, 0x7f]; // note on, middle C, full velocity
     var output = midiAccess.outputs.get(portID);
@@ -2687,23 +2684,17 @@ function sendMiddleC(midiAccess, portID) {
 }
 // Electron -> Angular
 electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].handle('getPirates', () => {
-    /*fs.appendFile('mynewfile3.txt', 'Hello content!', function (err) {
-      if (err) throw err;
-      //console.log('Saved!');
-    });*/
     const result = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](__dirname + '/assets/pirates.json');
     return JSON.parse(result.toString());
 });
 // Angular -> Electron
 electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('selectPirate', (event, name) => __awaiter(void 0, void 0, void 0, function* () {
     yield electron__WEBPACK_IMPORTED_MODULE_0__["dialog"].showMessageBox({ message: 'You selected: ' + name });
-    //  console.log("jaaa");
     event.returnValue = true;
 }));
 // Electron -> Angular
 electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].handle('readTab', () => __awaiter(void 0, void 0, void 0, function* () {
     var result;
-    console.log("lalala" + openFile);
     console.log(test);
     if (openFile == true) {
         result = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](test.pathTab, 'utf8');
@@ -2804,7 +2795,6 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('midiRead', (event, name) =>
         console.log(newName + ": file written");
         newName = "";
     });
-    //////////////////////////////////
     // zeigt alle Presets an
     var outputArray = [];
     for (let element in converterList) {
@@ -2812,44 +2802,9 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('midiRead', (event, name) =>
             preset: element,
         });
     }
-    //console.log(outputArray)  
-    ////////////////////////////////////
-    //let midiData = fs.readFileSync(filePath[0]);
-    //const midiData2 = fs.readFileSync("./src/assets/piano.mid");
-    //const mFile = new Midi(midiData);
-    /*
-    
-      let trackNotes = mFile.tracks[0].notes;
-    
-      let a: number = 0;
-      let b: number = 0;
-    
-      trackNotes.forEach(element => {
-    
-        noteReplace.forEach(element => {
-    
-          if (noteReplace[b][0] == trackNotes[a].midi) {
-    
-            var newNote :number = Number(noteReplace[b][1]);
-            
-            trackNotes[a].midi = newNote;
-            
-            //console.log(trackNotes[a])
-          }
-          b += 1;
-        });
-      a += 1;
-      b = 0;
-      });
-    
-      let newName: string = mFile.name.replace(".mid", "");
-    
-      fs.writeFileSync(newName + "_mod.mid", new Buffer(mFile.toArray()))
-      */
     event.returnValue = true;
 }));
 electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tuning, sortPattern) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(sortPattern);
     let songName = name;
     // notes on strings
     let stringG = "";
@@ -2921,10 +2876,6 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
         // create Midi file
         let midiData = fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"](file);
         let mFile = new _tonejs_midi__WEBPACK_IMPORTED_MODULE_2__["Midi"](midiData);
-        /*
-        var midiFile = new MidiFile();
-        midiFile.path = filePath;
-        midiFile.pathMidi = filePath + fileName;*/
         test.path = filePath;
         test.pathMidi = filePath + fileName;
         // midi file data
@@ -2938,7 +2889,8 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
         */
         let trackNotesNew = mFile.tracks[0].notes;
         // iterate midi notes
-        trackNotesNew.forEach(note => {
+        //trackNotesNew.forEach(note => {
+        for (let i = 0; i < trackNotesNew.length; i++) {
             /*
                   console.log("_____")
                   console.log(note.bars);*/
@@ -2951,41 +2903,53 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
             console.log("note bars "+note.bars);*/
             var filler = "";
             var fillerNote = "";
-            if (Number.isInteger(note.bars) /*&& note.bars > 1 */ && Number.isInteger(note.bars / 2)) {
+            var checkBars = false;
+            // check if bar is full
+            if (Number.isInteger(trackNotesNew[i].bars) /*&& note.bars > 1 */ && Number.isInteger(trackNotesNew[i].bars / 2)) {
+                checkBars = true;
+            }
+            // filter 
+            var zahl = trackNotesNew[i].bars.toFixed(0);
+            console.log(trackNotesNew[i].bars);
+            if (Number.isInteger(trackNotesNew[i].bars / 2)) {
+            }
+            //console.log(trackNotesNew[i].bars.toFixed(0));
+            if (checkBars == true) {
                 filler = "|---";
                 fillerNote = "|-";
             }
             else {
                 filler = "--";
                 fillerNote = "";
+                checkBars = false;
             }
-            if (notesE.slice(0, 5).includes(note.midi)) {
+            if (notesE.slice(0, 5).includes(trackNotesNew[i].midi)) {
                 //console.log("found");
                 stringG += filler;
                 stringD += filler;
                 stringA += filler;
-                stringE += fillerNote + notesE.indexOf(note.midi) + "-";
+                stringE += fillerNote + notesE.indexOf(trackNotesNew[i].midi) + "-";
                 //console.log(stringE);
             }
-            else if (notesA.slice(0, 5).includes(note.midi)) {
+            else if (notesA.slice(0, 5).includes(trackNotesNew[i].midi)) {
                 //console.log("found");
                 stringG += filler;
                 stringD += filler;
-                stringA += fillerNote + notesA.indexOf(note.midi) + "-";
+                stringA += fillerNote + notesA.indexOf(trackNotesNew[i].midi) + "-";
                 stringE += filler;
                 //console.log(stringA);
             }
-            else if (notesD.slice(0, 5).includes(note.midi)) {
+            else if (notesD.slice(0, 5).includes(trackNotesNew[i].midi)) {
                 //console.log("found");
                 stringG += filler;
-                stringD += fillerNote + notesD.indexOf(note.midi) + "-";
+                stringD += fillerNote + notesD.indexOf(trackNotesNew[i].midi) + "-";
                 stringA += filler;
                 stringE += filler;
                 //console.log(stringD);
             }
-            else if (notesG.slice(0, 11).includes(note.midi)) {
+            else if (notesG.slice(0, 11).includes(trackNotesNew[i].midi)) {
                 //console.log("found");
-                stringG += fillerNote + notesG.indexOf(note.midi) + "-";
+                stringG += fillerNote + notesG.indexOf(trackNotesNew[i].midi) + "-";
                 stringD += filler;
                 stringA += filler;
                 stringE += filler;
@@ -2994,7 +2958,7 @@ electron__WEBPACK_IMPORTED_MODULE_0__["ipcMain"].on('tabWrite', (event, name, tu
             else {
                 console.log("note not on Bass fretboard");
             }
-        });
+        }
         const heute = new Date();
         // write the stream
         // header

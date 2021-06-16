@@ -19,6 +19,15 @@ export class AppComponent {
   irgendwas: string = "hallo";
   sum: number = 0;
 
+  lala =
+[
+    { id: 0, class: 'fas fa-sign-out-alt', click: 'addPizza'},
+    { id: 1, class: 'fas fa-arrow-left', click: 'removePizza' },
+    { id: 2, class: 'far fa-sticky-note', click: 'updateGrid' }
+  ];
+
+  obj = JSON.parse('{"name":"John", "age":30, "city":"New York"}');
+
   sortPattern = true;
 
   @ViewChild ("i") input; 

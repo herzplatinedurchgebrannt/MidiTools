@@ -99,5 +99,11 @@
       </div>
    </div>
   </section>
+
+  <div>
+    <button *ngFor="let tool of lala" (click)="handleClick(tool.click)">
+      <i [class]="tool.class" > hallo </i>
+    </button>
+  </div>
   
   
