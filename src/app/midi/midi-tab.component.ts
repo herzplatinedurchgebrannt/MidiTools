@@ -50,7 +50,7 @@ import { PirateLocalService } from '../pirate-local.service';
   `,
   styles: [
     'div { padding: 5px; align-items: center; display: flex; justify-content: center;}',
-    'textarea {background-image: linear-gradient(hsl(190,10%,98%), hsl(190,10%,94%)); padding: 1ex; font-size: 0.75em; box-sizing: border-box; color: black}'
+    'textarea { background-color: darkgray; background-image: linear-gradient(hsl(190,10%,98%), hsl(190,10%,94%)); padding: 1ex; font-size: 0.75em; box-sizing: border-box; color: black}'
   ]
 })
 export class MidiTabComponent implements OnInit {
