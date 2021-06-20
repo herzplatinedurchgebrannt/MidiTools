@@ -64,10 +64,10 @@ import { PirateLocalService } from '../pirate-local.service';
 
 <!-- Hier spielt die Musik! -->
 
-  <div *ngFor="let instrument of sequencerArray; let u = index"> 
+  <div *ngFor="let instrument of buttonArray; let u = index"> 
   <div>
     <button 
-      *ngFor="let step of instrument; let i = index" [style.background-color]="sequencerArray[u][i].color"
+      *ngFor="let step of instrument; let i = index" [style.background-color]="buttonArray[u][i].color"
       (click) = "setStep($event)" class = "{{ step.class }}" 
       id="{{ step.id }}"> 
  
@@ -108,7 +108,9 @@ import { PirateLocalService } from '../pirate-local.service';
 export class OtherComponent implements OnInit {
 
   private instruments = ["kick","snare","hihat","crash","tom_lo","tom_hi"];
+  private buttonArray = new Array();
   private sequencerArray = new Array();
+
   buttonValue: string;
 
   toggle5 = true;
@@ -118,55 +120,55 @@ export class OtherComponent implements OnInit {
     this.addList(this.instruments);
   }
 
+  // build button + sequencer arrays
   addList(instruments: string [])
   {
-    for (let j = 0; j < instruments.length; j++ ){
-      var innerArray = new Array();
+    for (let j = 0; j < instruments.length; j++ )
+    {
+      var buttonSubArray = new Array();
+      var sequencerSubArray = new Array();
   
-      for (let i = 0; i < 16; i++){
-  
-        innerArray[i] = new Object();
-        innerArray[i].id = i;
-        innerArray[i].class = instruments[j];
-        innerArray[i].click = this.toggle(i); 
-        innerArray[i].stepActive = false;
-        innerArray[i].color = "blue";
-      }
-      //this.sequencerArray.push([innerArray]);
-      this.sequencerArray[j] = innerArray;
-      console.log("!!!!!");
-      console.log(this.sequencerArray)
-    }
+      for (let i = 0; i < 16; i++)
+      {
+        buttonSubArray[i] = new Object();
+        buttonSubArray[i].id = i;
+        buttonSubArray[i].class = instruments[j];
+        buttonSubArray[i].click = this.toggle(i); 
+        buttonSubArray[i].stepActive = false;
+        buttonSubArray[i].color = "blue";
 
-    //console.log(this.btnColour)
-    /*
-    console.log("1---------")
-    console.log(this.sequencerArray[0])
-    console.log(this.sequencerArray[1])
-    console.log(this.sequencerArray[0][0])
-    */
+        // 0 means no volume == false, sequencerArray saves dynamic velocity
+        sequencerSubArray.push(0);
+      }
+      this.buttonArray[j] = buttonSubArray;
+      this.sequencerArray[j] = sequencerSubArray;
+    }
+    console.log(this.sequencerArray);
   }
   
   setStep(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
     
-    console.log(button.id);
-    console.log(button.className);
+    //console.log(button.id);
+    //console.log(button.className);
 
     let row: number;
     row = this.instruments.indexOf(button.className)
 
-    if (this.sequencerArray[row][button.id].stepActive == true)
+    if (this.buttonArray[row][button.id].stepActive == true)
     {
-      console.log(this.sequencerArray[0][button.id]);
-      this.sequencerArray[row][button.id].stepActive = false;
-      this.sequencerArray[row][button.id].color = "green";
+      this.buttonArray[row][button.id].stepActive = false;
+      this.buttonArray[row][button.id].color = "green";
+      this.sequencerArray[row][button.id] = 0;
     }
     else 
     {
-      this.sequencerArray[row][button.id].stepActive = true;
-      this.sequencerArray[row][button.id].color = "black";
+      this.buttonArray[row][button.id].stepActive = true;
+      this.buttonArray[row][button.id].color = "black";
+      this.sequencerArray[row][button.id] = 127;
     }
+
+    console.log(this.sequencerArray);
 
     /*
     console.log("-----")
