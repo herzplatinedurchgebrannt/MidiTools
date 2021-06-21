@@ -2,6 +2,8 @@ import { ElementRef, ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { PirateService } from '../pirate.service';
 import { PirateLocalService } from '../pirate-local.service';
+import { Howl } from 'howler';
+
 
 @Component({
   selector: 'app-other',
@@ -111,6 +113,20 @@ export class OtherComponent implements OnInit {
   private buttonArray = new Array();
   private sequencerArray = new Array();
 
+  counter: number = 0;
+  interval: number;
+  isPlaying: boolean = false;
+
+  soundKick = new Howl({ src: ['assets/drums/kick.wav']});  
+  soundSnare = new Howl({ src: ['assets/drums/snare.wav']});
+  soundHatCl = new Howl({ src: ['assets/drums/hihat_cl.wav']});
+  soundHatHaOp = new Howl({ src: ['assets/drums/hihat_ho.wav']});
+  soundTomLo = new Howl({ src: ['assets/drums/tom_lo.wav']});
+  soundTomHi = new Howl({ src: ['assets/drums/tom_hi.wav']});
+  soundCrashLe = new Howl({ src: ['assets/drums/crash_le.wav']});
+  soundCrashRi = new Howl({ src: ['assets/drums/crash_ri.wav']});
+  
+
   buttonValue: string;
 
   toggle5 = true;
@@ -118,6 +134,8 @@ export class OtherComponent implements OnInit {
   
   constructor(private pirateService: PirateService) { 
     this.addList(this.instruments);
+    this.interval = 1000;
+    this.startSequencer();
   }
 
   // build button + sequencer arrays
@@ -145,6 +163,7 @@ export class OtherComponent implements OnInit {
     }
     console.log(this.sequencerArray);
   }
+
   
   setStep(event: MouseEvent) {
     const button = event.target as HTMLButtonElement;
@@ -157,16 +176,41 @@ export class OtherComponent implements OnInit {
 
     if (this.buttonArray[row][button.id].stepActive == true)
     {
+      this.sequencerArray[row][button.id] = 0;
       this.buttonArray[row][button.id].stepActive = false;
       this.buttonArray[row][button.id].color = "green";
-      this.sequencerArray[row][button.id] = 0;
     }
     else 
     {
+      this.sequencerArray[row][button.id] = 127;
       this.buttonArray[row][button.id].stepActive = true;
       this.buttonArray[row][button.id].color = "black";
-      this.sequencerArray[row][button.id] = 127;
+
+      switch (row) {
+        case 0:
+          this.soundKick.play();
+          break;
+        case 1:
+          this.soundSnare.play();
+          break;        
+        case 2:
+          this.soundHatCl.play();
+        break;
+        case 3:
+          this.soundHatHaOp.play();
+        break;
+      
+        default:
+          break;
+      }
     }
+
+
+
+
+
+  
+    
 
     console.log(this.sequencerArray);
 
@@ -179,6 +223,69 @@ export class OtherComponent implements OnInit {
     this.toggle5 = !this.toggle5;
     this.status = this.toggle5 ? 'Enable' : 'Disable';
  }
+
+
+  startSequencer()
+  {
+    console.log("1 "+this.isPlaying);
+    this.isPlaying = true;
+    this.counter = 0;
+
+
+
+
+    setInterval(() => {
+        if (this.isPlaying == true)
+          {
+            this.buttonArray[0][this.counter].color = "red";
+
+            if (this.counter != 0){
+              this.buttonArray[0][this.counter-1].color = "green";
+            }
+            else if (this.counter == this.sequencerArray[0].length + 1){
+              this.buttonArray[0][this.sequencerArray[0].length] = "green";
+            }
+
+            console.log(this.sequencerArray[0].length)
+
+
+            /*
+            if (this.counter == 0){
+              
+              this.soundKick.play();
+              this.counter += 1;
+
+            }
+            else if (this.counter > 0 && this.counter < 16){
+              this.buttonArray[0][this.counter].color = "red";
+              this.soundKick.play();
+              this.counter += 1;
+            }
+            else {
+              // ...
+            }*/
+
+
+            this.counter += 1;
+
+            if (this.counter >= this.sequencerArray[0].length){
+              this.counter = 0;
+            }
+        }
+      //this.soundKick.play();
+      }, 
+    this.interval
+    );
+  }
+
+  playAudio(){
+    console.log("Playing Sound");
+    let audio = new Audio();
+    //Can externalize the variables
+    audio.src = "./../../src/assets/kick.wav";
+    audio.load();
+    audio.play();
+  }
 
   toggle(button) {
     this.buttonValue = button.id;
