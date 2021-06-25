@@ -47,6 +47,10 @@ import { PirateLocalService } from '../pirate-local.service';
     </div>
  </div>
 </section>
+
+
+
+
   `,
   styles: [
     'div { padding: 5px; align-items: center; display: flex; justify-content: center;}',

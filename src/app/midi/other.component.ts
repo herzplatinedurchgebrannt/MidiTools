@@ -9,65 +9,43 @@ import { Howl } from 'howler';
   selector: 'app-other',
   template: `
 
-  <div class="container p-3 my-3 bg-dark text-white">
-    <h1>LX MIDI TOOLS</h1>
-    <p>Bass TAB Creator. Midi Drum Converter.</p>
-  </div>
+<div class="container p-3 my-3 bg-dark text-white">
+  <h1>LX MIDI TOOLS</h1>
+  <p>Bass TAB Creator. Midi Drum Converter. Drum Sequencer</p>
+</div>
 
-  <hr>
+<hr>
 
+<div class="container shadow min-vh-50 py-2">
   <div class="row">
-    <div class="col-sm-3"> 
-      <button type="button" class="btn btn-outline-secondary" (click)="angToElec()">MIDI Write</button>
+    <div class="col"> 
+      <button type="button" class="btn btn-outline-secondary" (click)="startSequencer()">Play</button>
+      <button type="button" class="btn btn-outline-secondary" (click)="stopStuff()">Stop</button>
     </div>
+</div>
+
+<div class="row">
+    <div class="col">  
+      <label for="inputsm"></label>
+      <input class="form-control" id="inputdefault" type="number" min="50" max="500">
+    </div>
+    <div class="col">  
+    <form>
+      <select name="drumkit" class="custom-select-sm" #kit>
+        <option value="rock">Rock Drumkit</option>
+        <option value="electro">Electronic</option>
+      </select>
+    </form>
   </div>
-  
-  <hr>
-
-
-
-  <!--
-  <mat-button-toggle-group>
-    <mat-button-toggle *ngFor="let tool of testList">
-      <button #tool (click)="toggle(tool)" class="testclass" id="tool"> Kick </button>
-    </mat-button-toggle>
-  </mat-button-toggle-group>
-
-  <hr>
-
-  <mat-button-toggle-group>
-  <mat-button-toggle *ngFor="let tool of testList">
-      <button (click)="toggle3($event)" class="snare" id="{{tool}}"></button>
-  </mat-button-toggle>
-  </mat-button-toggle-group>
-
-  <button (click)="toggle3($event)" class="kick" id="btn1"></button>
-  
-  -->
-  
-  <hr>  
-  <!--
-  <div>
-  <button 
-  *ngFor="let element of kickArray; let i = index"
-  (click) = "toggle3($event)" class = "{{ element.class }}"
-  id="{{ element.id }}"
-  
-  > 
-  Kick
-{{ element.id }} - (Index: {{ i }})
-  
-  </button>
   </div>
-  -->
-  
+</div>
 
+<hr>
 
-
-<!-- Hier spielt die Musik! -->
-
+<div class="container">
   <div *ngFor="let instrument of buttonArray; let u = index"> 
   <div>
+    <label class="note"> {{ instrumentsMidi[u] }} C3</label>
     <button 
       *ngFor="let step of instrument; let i = index" [style.background-color]="buttonArray[u][i].color"
       (click) = "setStep($event)" class = "{{ step.class }}" 
@@ -78,38 +56,42 @@ import { Howl } from 'howler';
     </button>
   </div>
   </div>
+</div>
 
 
-
-
-
-
-  
-<!--
-  <div>
-    <button 
-      *ngFor="let bu of sequencerArray[1][0]; let e = index" 
-      (click) = "toggle3($event)" class = "{{ bu.class }}"
-      id="{{ bu.id }}"
-      >
-      Kick
-      {{ bu.id }} - (Index: {{ e }})
-    </button>
+<div class="container shadow min-vh-50 py-2">
+  <div class="row">
+      <div class="col">
+          <button class="btn btn-outline-secondary">
+              Clear
+          </button>
+          <button class="btn btn-outline-secondary">
+              Load
+          </button>
+          <button class="btn btn-outline-secondary">
+              Save
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="stopStuff()">Export</button>
+      </div>
   </div>
-  
-  <button #btn1 (click)="toggle(btn1)" class="someclass" id="btn1">Button 1</button>
-  <button #btn2 (click)="toggle(btn2)" class="someclass" id="btn2">Button 2</button>
-  -->
+</div>
+
+
   `,
   styles: [ '.button { background-color: #4CAF50; /* Green */border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}',
             '.kick { }',
             '.green {background-color: green;}',
-            '.red { background-color: red; }'
+            '.red { background-color: red; }',
+            'label.note { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: medium; color:white}',
+            'button.btn btn-outline-secondary {margin-right: 0.2em}'
+
   ]
 })
+
 export class OtherComponent implements OnInit {
 
   private instruments = ["kick","snare","hihat","crash","tom_lo","tom_hi"];
+  private instrumentsMidi = [60, 62, 66, 68, 72, 71];
   private buttonArray = new Array();
   private sequencerArray = new Array();
 
@@ -118,30 +100,30 @@ export class OtherComponent implements OnInit {
   isPlaying: boolean = false;
 
   soundKick = new Howl({ src: ['assets/drums/kick.wav']});  
-  soundSnare = new Howl({ src: ['assets/drums/snare.wav']});
-  soundHatCl = new Howl({ src: ['assets/drums/hihat_cl.wav']});
-  soundHatHaOp = new Howl({ src: ['assets/drums/hihat_ho.wav']});
-  soundTomLo = new Howl({ src: ['assets/drums/tom_lo.wav']});
-  soundTomHi = new Howl({ src: ['assets/drums/tom_hi.wav']});
-  soundCrashLe = new Howl({ src: ['assets/drums/crash_le.wav']});
-  soundCrashRi = new Howl({ src: ['assets/drums/crash_ri.wav']});
-  
+  soundSnare = new Howl({ src: ['assets/drums/snare.wav'], volume: 0.7});
+  soundHatCl = new Howl({ src: ['assets/drums/hihat_cl.wav'], volume: 0.2});
+  soundHatHaOp = new Howl({ src: ['assets/drums/hihat_ho.wav'], volume: 0.2});
+  soundTomLo = new Howl({ src: ['assets/drums/tom_lo.wav'], volume: 0.3});
+  soundTomHi = new Howl({ src: ['assets/drums/tom_hi.wav'], volume: 0.3});
+  soundCrashLe = new Howl({ src: ['assets/drums/crash_le.wav'], volume: 0.5});
+  soundCrashRi = new Howl({ src: ['assets/drums/crash_ri.wav'], volume: 0.5});
 
   buttonValue: string;
 
   toggle5 = true;
   status = 'Enable'; 
   
-  constructor(private pirateService: PirateService) { 
+  constructor ( private pirateService: PirateService ) 
+  { 
     this.addList(this.instruments);
-    this.interval = 1000;
-    this.startSequencer();
+    this.interval = 200;
+    //this.startSequencer();
   }
 
   // build button + sequencer arrays
   addList(instruments: string [])
   {
-    for (let j = 0; j < instruments.length; j++ )
+    for (let j = 0; j < instruments.length; j++)
     {
       var buttonSubArray = new Array();
       var sequencerSubArray = new Array();
@@ -185,45 +167,20 @@ export class OtherComponent implements OnInit {
       this.sequencerArray[row][button.id] = 127;
       this.buttonArray[row][button.id].stepActive = true;
       this.buttonArray[row][button.id].color = "grey";
-
-      switch (row) {
-        case 0:
-          this.soundKick.play();
-          break;
-        case 1:
-          this.soundSnare.play();
-          break;        
-        case 2:
-          this.soundHatCl.play();
-        break;
-        case 3:
-          this.soundHatHaOp.play();
-        break;
-      
-        default:
-          break;
-      }
     }
 
-
-
-
-
-  
-    
-
-    console.log(this.sequencerArray);
-
-    /*
-    console.log("-----")
-    console.log(this.sequencerArray[row][0])
-    */
 
 
     this.toggle5 = !this.toggle5;
     this.status = this.toggle5 ? 'Enable' : 'Disable';
  }
 
+  stopStuff(){
+    clearInterval(this.timer);
+  }
+
+
+  timer: any;
 
   startSequencer()
   {
@@ -233,62 +190,72 @@ export class OtherComponent implements OnInit {
 
     
 
-    setInterval(() => {
+    this.timer = setInterval(() => {
         if (this.isPlaying == true)
           {
 
-            if (this.counter == 0)
-            {
-              if (this.buttonArray[0][this.sequencerArray[0].length-1].stepActive == true){
-                this.buttonArray[0][this.sequencerArray[0].length-1].color = "grey";
+            for (let i = 0; i < this.buttonArray.length; i++){
+              console.log(i)
+
+              if (this.counter == 0)
+              {
+                if (this.buttonArray[i][this.sequencerArray[i].length-1].stepActive == true)
+                {
+                  this.buttonArray[i][this.sequencerArray[i].length-1].color = "grey";
+                }
+                else
+                {
+                  this.buttonArray[i][this.sequencerArray[i].length-1].color = "white";
+                }
+              }
+              else if (this.counter != 0)
+              {
+                if (this.buttonArray[i][this.counter-1].stepActive == true)
+                {
+                  this.buttonArray[i][this.counter-1].color = "grey";
+                }
+                else
+                {
+                  this.buttonArray[i][this.counter-1].color = "white";
+                }
+              }
+  
+              if (this.buttonArray[i][this.counter].stepActive == true)
+              {
+                this.buttonArray[i][this.counter].color = "red";
+                switch (i) {
+                  case 0:
+                    this.soundKick.play();
+                    break;
+                  case 1:
+                    this.soundSnare.play();
+                    break;        
+                  case 2:
+                    this.soundHatCl.play();
+                  break;
+                  case 3:
+                    this.soundHatHaOp.play();
+                  break;
+                  case 4:
+                    this.soundTomLo.play();
+                  break;
+                  case 5:
+                    this.soundTomHi.play();
+                  break;
+                  case 6:
+                    this.soundCrashLe.play();
+                  break;
+                
+                  default:
+                    break;
+                }
               }
               else
               {
-                this.buttonArray[0][this.sequencerArray[0].length-1].color = "white";
+                this.buttonArray[i][this.counter].color = "blue";
               }
-            }
-            else if (this.counter != 0)
-            {
-              if (this.buttonArray[0][this.counter-1].stepActive == true){
-                this.buttonArray[0][this.counter-1].color = "grey";
-              }
-              else
-              {
-                this.buttonArray[0][this.counter-1].color = "white";
-              }
-            }
-
-            if (this.buttonArray[0][this.counter].stepActive == true)
-            {
-              this.buttonArray[0][this.counter].color = "red";
-            }
-            else
-            {
-              this.buttonArray[0][this.counter].color = "blue";
-            }
-
-
-
-
-            console.log(this.sequencerArray[0].length)
-
-
-            /*
-            if (this.counter == 0){
-              
-              this.soundKick.play();
-              this.counter += 1;
 
             }
-            else if (this.counter > 0 && this.counter < 16){
-              this.buttonArray[0][this.counter].color = "red";
-              this.soundKick.play();
-              this.counter += 1;
-            }
-            else {
-              // ...
-            }*/
-
 
             this.counter += 1;
 
@@ -296,7 +263,6 @@ export class OtherComponent implements OnInit {
               this.counter = 0;
             }
         }
-      //this.soundKick.play();
       }, 
     this.interval
     );

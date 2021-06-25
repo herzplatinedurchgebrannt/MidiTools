@@ -15,5 +15,15 @@ textarea {
     background-color: darkgray;
 }
 
+label.note {
+    background-color: red;
+}
+
+.note {
+    background-color: red;
+}
+
+button {background-color: blue;
+}
 
 
