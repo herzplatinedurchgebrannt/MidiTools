@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, ipcRenderer } from 'electron';
 import * as fs from 'fs';
 import { Midi } from '@tonejs/midi'
 import {inputById, MIDI_INPUT, MIDI_OUTPUT, outputByName} from '@ng-web-apis/midi';
@@ -43,7 +43,7 @@ class Pattern
 function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 600,
-    height: 1000,
+    height: 700,
     webPreferences: {
       nodeIntegration: true
     }
@@ -766,6 +766,8 @@ ipcMain.on('tabWrite', async (event: Electron.IpcMainEvent, name: string, tuning
     //console.log(newName + ": file written")
 
      //newName = "";
+
+     
 
 
   //tabComplete = tabComplete.concat(stringHeader,stringG);

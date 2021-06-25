@@ -153,7 +153,7 @@ export class OtherComponent implements OnInit {
         buttonSubArray[i].class = instruments[j];
         buttonSubArray[i].click = this.toggle(i); 
         buttonSubArray[i].stepActive = false;
-        buttonSubArray[i].color = "blue";
+        buttonSubArray[i].color = "white";
 
         // 0 means no volume == false, sequencerArray saves dynamic velocity
         sequencerSubArray.push(0);
@@ -178,13 +178,13 @@ export class OtherComponent implements OnInit {
     {
       this.sequencerArray[row][button.id] = 0;
       this.buttonArray[row][button.id].stepActive = false;
-      this.buttonArray[row][button.id].color = "green";
+      this.buttonArray[row][button.id].color = "white";
     }
     else 
     {
       this.sequencerArray[row][button.id] = 127;
       this.buttonArray[row][button.id].stepActive = true;
-      this.buttonArray[row][button.id].color = "black";
+      this.buttonArray[row][button.id].color = "grey";
 
       switch (row) {
         case 0:
@@ -231,20 +231,44 @@ export class OtherComponent implements OnInit {
     this.isPlaying = true;
     this.counter = 0;
 
-
-
+    
 
     setInterval(() => {
         if (this.isPlaying == true)
           {
-            this.buttonArray[0][this.counter].color = "red";
 
-            if (this.counter != 0){
-              this.buttonArray[0][this.counter-1].color = "green";
+            if (this.counter == 0)
+            {
+              if (this.buttonArray[0][this.sequencerArray[0].length-1].stepActive == true){
+                this.buttonArray[0][this.sequencerArray[0].length-1].color = "grey";
+              }
+              else
+              {
+                this.buttonArray[0][this.sequencerArray[0].length-1].color = "white";
+              }
             }
-            else if (this.counter == this.sequencerArray[0].length + 1){
-              this.buttonArray[0][this.sequencerArray[0].length] = "green";
+            else if (this.counter != 0)
+            {
+              if (this.buttonArray[0][this.counter-1].stepActive == true){
+                this.buttonArray[0][this.counter-1].color = "grey";
+              }
+              else
+              {
+                this.buttonArray[0][this.counter-1].color = "white";
+              }
             }
+
+            if (this.buttonArray[0][this.counter].stepActive == true)
+            {
+              this.buttonArray[0][this.counter].color = "red";
+            }
+            else
+            {
+              this.buttonArray[0][this.counter].color = "blue";
+            }
+
+
+
 
             console.log(this.sequencerArray[0].length)
 

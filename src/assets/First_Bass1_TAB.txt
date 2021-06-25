@@ -1,9 +1,9 @@
 
-Song: Songname
+Song: Fuck off
 Data: /Users/alexandermathieu/Coding/Electron/MidiTools/src/assets/First_Bass1.mid
 Tuning: Standard E [ E, A, D, G ]
 BPM: 170.00
-16.6.2021, 19:04:59
+18.6.2021, 21:28:50
 
 -----------------------------------
 

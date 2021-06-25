@@ -42,68 +42,10 @@
     </div>
   </div>-->
 
-  <div class="container p-3 my-3 bg-dark text-white">
-    <h1>LX MIDI TOOLS</h1>
-    <p>This container has a dark background color and a white text, and some extra padding and margins.</p>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-3"> 
-      <input type="text" #i value="Songname">
-    </div>
-    <div class="col-sm-3">  
-      <form>
-        <select name="tuning" class="custom-select-sm" #tun>
-          <option value="standard" >E-Standard</option>
-          <option value="dropped">D-Dropped</option>
-        </select>
-      </form>
-    </div>
-    <div class="col-sm-3">  
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" #sort checked (change)="function1($event)">
-        <label class="
-        form-check-label" for="flexCheckChecked">
-           Sort pattern
-        </label>
-      </div>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="row">
-    <div class="col-sm-3"> 
-      <button type="button" class="btn btn-outline-secondary" (click)="angToElec()">MIDI Write</button>
-    </div>
-  </div>
+  <app-header></app-header>
   
-  <hr>
-  <div class="form-group">
-    <label for="comment"></label>
-    <pre>
-    <textarea class="form-control" rows="17" cols="70" id="comment" #ausgabe></textarea>
-    </pre>
-  </div>
-  
-  <section>
-    <div class="midis">
-      <div>
-        <button type="button" class="btn btn-outline-secondary" (click)="midiRead()">Convert Drums</button>
-      </div>
-      <div>
-        <button type="button" class="btn btn-outline-secondary" (click)="tabWrite()">Create Bass TAB</button>
-      </div>
-      <div>
-        <button type="button" class="btn btn-outline-secondary" (click)="readTab()">Open file in editor</button>
-      </div>
-   </div>
-  </section>
+  <app-midi></app-midi>
 
-  <div>
-    <button *ngFor="let tool of lala" (click)="handleClick(tool.click)">
-      <i [class]="tool.class" > hallo </i>
-    </button>
-  </div>
+
   
   
