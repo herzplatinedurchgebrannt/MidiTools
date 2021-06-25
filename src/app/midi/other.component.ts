@@ -27,7 +27,7 @@ import { Howl } from 'howler';
 <div class="row">
     <div class="col">  
       <label for="inputsm"></label>
-      <input class="form-control" id="inputdefault" type="number" min="50" max="500">
+      <input class="form-control" id="inputdefault" type="number" min="50" max="500" #tem value="500">
     </div>
     <div class="col">  
     <form>
@@ -50,10 +50,10 @@ import { Howl } from 'howler';
       *ngFor="let step of instrument; let i = index" [style.background-color]="buttonArray[u][i].color"
       (click) = "setStep($event)" class = "{{ step.class }}" 
       id="{{ step.id }}"> 
- 
       {{ step.id +1 }}
       <!--{{ step.id }} - (Index: {{ i }})-->
     </button>
+    <label class="note"> {{ instruments[u] }}</label>
   </div>
   </div>
 </div>
@@ -62,13 +62,13 @@ import { Howl } from 'howler';
 <div class="container shadow min-vh-50 py-2">
   <div class="row">
       <div class="col">
-          <button class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" (click)="clearPattern()">
               Clear
           </button>
-          <button class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" (click)="loadPattern()">
               Load
           </button>
-          <button class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" (click)="changeTempo()">
               Save
           </button>
           <button type="button" class="btn btn-outline-secondary" (click)="stopStuff()">Export</button>
@@ -78,22 +78,49 @@ import { Howl } from 'howler';
 
 
   `,
-  styles: [ '.button { background-color: #4CAF50; /* Green */border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}',
+  styles: [ '.button { background-color: #4CAF50; /* Green */border: none; color: red; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}',
             '.kick { }',
             '.green {background-color: green;}',
             '.red { background-color: red; }',
-            'label.note { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: medium; color:white}',
-            'button.btn btn-outline-secondary {margin-right: 0.2em}'
+            'label.note { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: small; color:white; margin-left: 0.2em}',
+            'button.btn btn-outline-secondary {margin-right: 0.2em; }'
 
   ]
 })
 
 export class OtherComponent implements OnInit {
 
+  @ViewChild ("tem") tempo; 
+  @ViewChild ("i") input; 
+
   private instruments = ["kick","snare","hihat","crash","tom_lo","tom_hi"];
   private instrumentsMidi = [60, 62, 66, 68, 72, 71];
   private buttonArray = new Array();
   private sequencerArray = new Array();
+
+  private pattern1 = [[127,0,0,0,127,0,0,0,127,0,0,0,127,0,0,0],
+                      [0,0,127,0,0,0,127,0,0,0,127,0,0,0,127,0],
+                      [0,0,127,0,127,0,127,0,127,0,127,0,127,0,127,0],
+                      [127,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+
+  private pattern0 = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
+
+
+  loadPattern(){
+    this.sequencerArray = this.pattern1;
+  }
+
+  clearPattern(){
+    //this.addList(this.instruments);
+    this.sequencerArray = this.pattern0;
+  }
 
   counter: number = 0;
   interval: number;
@@ -117,7 +144,11 @@ export class OtherComponent implements OnInit {
   { 
     this.addList(this.instruments);
     this.interval = 200;
-    //this.startSequencer();
+  }
+
+  changeTempo(){
+    this.interval = this.tempo.nativeElement.value;
+    console.log(this.interval);
   }
 
   // build button + sequencer arrays
@@ -173,10 +204,18 @@ export class OtherComponent implements OnInit {
 
     this.toggle5 = !this.toggle5;
     this.status = this.toggle5 ? 'Enable' : 'Disable';
+
+
+    // delete next line!!
+    //this.sequencerArray = this.pattern1;
+
+    //console.log(this.sequencerArray);
+
  }
 
   stopStuff(){
     clearInterval(this.timer);
+    //console.log(this.tempo.nativeElement.value);
   }
 
 
@@ -184,9 +223,10 @@ export class OtherComponent implements OnInit {
 
   startSequencer()
   {
-    console.log("1 "+this.isPlaying);
+    //console.log("1 "+this.isPlaying);
     this.isPlaying = true;
     this.counter = 0;
+
 
     
 
@@ -194,12 +234,12 @@ export class OtherComponent implements OnInit {
         if (this.isPlaying == true)
           {
 
-            for (let i = 0; i < this.buttonArray.length; i++){
-              console.log(i)
+            for (let i = 0; i < this.sequencerArray.length; i++){
+              //console.log(i)
 
               if (this.counter == 0)
               {
-                if (this.buttonArray[i][this.sequencerArray[i].length-1].stepActive == true)
+                if (this.sequencerArray[i][this.sequencerArray.length-1] == 127)
                 {
                   this.buttonArray[i][this.sequencerArray[i].length-1].color = "grey";
                 }
@@ -210,7 +250,7 @@ export class OtherComponent implements OnInit {
               }
               else if (this.counter != 0)
               {
-                if (this.buttonArray[i][this.counter-1].stepActive == true)
+                if (this.sequencerArray[i][this.counter-1] == 127)
                 {
                   this.buttonArray[i][this.counter-1].color = "grey";
                 }
@@ -220,7 +260,7 @@ export class OtherComponent implements OnInit {
                 }
               }
   
-              if (this.buttonArray[i][this.counter].stepActive == true)
+              if (this.sequencerArray[i][this.counter] == 127)
               {
                 this.buttonArray[i][this.counter].color = "red";
                 switch (i) {
@@ -257,6 +297,7 @@ export class OtherComponent implements OnInit {
 
             }
 
+            console.log(this.pattern1);
             this.counter += 1;
 
             if (this.counter >= this.sequencerArray[0].length){
@@ -269,7 +310,7 @@ export class OtherComponent implements OnInit {
   }
 
   playAudio(){
-    console.log("Playing Sound");
+    //console.log("Playing Sound");
     let audio = new Audio();
     //Can externalize the variables
     audio.src = "./../../src/assets/kick.wav";
@@ -279,7 +320,7 @@ export class OtherComponent implements OnInit {
 
   toggle(button) {
     this.buttonValue = button.id;
-    console.log(this.buttonValue);
+   // console.log(this.buttonValue);
   }
 
 

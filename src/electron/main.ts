@@ -42,7 +42,7 @@ class Pattern
 
 function createWindow () {
   const mainWindow = new BrowserWindow({
-    width: 600,
+    width: 700,
     height: 700,
     webPreferences: {
       nodeIntegration: true

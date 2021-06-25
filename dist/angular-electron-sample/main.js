@@ -348,40 +348,48 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function OtherComponent_div_27_button_4_Template(rf, ctx) { if (rf & 1) {
-    const _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 16);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_div_27_button_4_Template_button_click_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8); const ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r7.setStep($event); });
+
+const _c0 = ["tem"];
+const _c1 = ["i"];
+function OtherComponent_div_28_button_4_Template(rf, ctx) { if (rf & 1) {
+    const _r9 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "button", 17);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_div_28_button_4_Template_button_click_0_listener($event) { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r9); const ctx_r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"](2); return ctx_r8.setStep($event); });
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const step_r5 = ctx.$implicit;
-    const i_r6 = ctx.index;
-    const u_r3 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
-    const ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassMap"](step_r5.class);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("background-color", ctx_r4.buttonArray[u_r3][i_r6].color);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("id", step_r5.id);
+    const step_r6 = ctx.$implicit;
+    const i_r7 = ctx.index;
+    const u_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().index;
+    const ctx_r5 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassMap"](step_r6.class);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵstyleProp"]("background-color", ctx_r5.buttonArray[u_r4][i_r7].color);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpropertyInterpolate"]("id", step_r6.id);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", step_r5.id + 1, " ");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", step_r6.id + 1, " ");
 } }
-function OtherComponent_div_27_Template(rf, ctx) { if (rf & 1) {
+function OtherComponent_div_28_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "div");
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "label", 14);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "label", 15);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, OtherComponent_div_27_button_4_Template, 2, 7, "button", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, OtherComponent_div_28_button_4_Template, 2, 7, "button", 16);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](5, "label", 15);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](6);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
 } if (rf & 2) {
-    const instrument_r2 = ctx.$implicit;
-    const u_r3 = ctx.index;
-    const ctx_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+    const instrument_r3 = ctx.$implicit;
+    const u_r4 = ctx.index;
+    const ctx_r2 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](3);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r1.instrumentsMidi[u_r3], " C3");
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r2.instrumentsMidi[u_r4], " C3");
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", instrument_r2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", instrument_r3);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](2);
+    _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r2.instruments[u_r4], "");
 } }
 class OtherComponent {
     constructor(pirateService) {
@@ -390,6 +398,18 @@ class OtherComponent {
         this.instrumentsMidi = [60, 62, 66, 68, 72, 71];
         this.buttonArray = new Array();
         this.sequencerArray = new Array();
+        this.pattern1 = [[127, 0, 0, 0, 127, 0, 0, 0, 127, 0, 0, 0, 127, 0, 0, 0],
+            [0, 0, 127, 0, 0, 0, 127, 0, 0, 0, 127, 0, 0, 0, 127, 0],
+            [0, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0],
+            [127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
+        this.pattern0 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
         this.counter = 0;
         this.isPlaying = false;
         this.soundKick = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/kick.wav'] });
@@ -404,7 +424,17 @@ class OtherComponent {
         this.status = 'Enable';
         this.addList(this.instruments);
         this.interval = 200;
-        //this.startSequencer();
+    }
+    loadPattern() {
+        this.sequencerArray = this.pattern1;
+    }
+    clearPattern() {
+        //this.addList(this.instruments);
+        this.sequencerArray = this.pattern0;
+    }
+    changeTempo() {
+        this.interval = this.tempo.nativeElement.value;
+        console.log(this.interval);
     }
     // build button + sequencer arrays
     addList(instruments) {
@@ -444,20 +474,24 @@ class OtherComponent {
         }
         this.toggle5 = !this.toggle5;
         this.status = this.toggle5 ? 'Enable' : 'Disable';
+        // delete next line!!
+        //this.sequencerArray = this.pattern1;
+        //console.log(this.sequencerArray);
     }
     stopStuff() {
         clearInterval(this.timer);
+        //console.log(this.tempo.nativeElement.value);
     }
     startSequencer() {
-        console.log("1 " + this.isPlaying);
+        //console.log("1 "+this.isPlaying);
         this.isPlaying = true;
         this.counter = 0;
         this.timer = setInterval(() => {
             if (this.isPlaying == true) {
-                for (let i = 0; i < this.buttonArray.length; i++) {
-                    console.log(i);
+                for (let i = 0; i < this.sequencerArray.length; i++) {
+                    //console.log(i)
                     if (this.counter == 0) {
-                        if (this.buttonArray[i][this.sequencerArray[i].length - 1].stepActive == true) {
+                        if (this.sequencerArray[i][this.sequencerArray.length - 1] == 127) {
                             this.buttonArray[i][this.sequencerArray[i].length - 1].color = "grey";
                         }
                         else {
@@ -465,14 +499,14 @@ class OtherComponent {
                         }
                     }
                     else if (this.counter != 0) {
-                        if (this.buttonArray[i][this.counter - 1].stepActive == true) {
+                        if (this.sequencerArray[i][this.counter - 1] == 127) {
                             this.buttonArray[i][this.counter - 1].color = "grey";
                         }
                         else {
                             this.buttonArray[i][this.counter - 1].color = "white";
                         }
                     }
-                    if (this.buttonArray[i][this.counter].stepActive == true) {
+                    if (this.sequencerArray[i][this.counter] == 127) {
                         this.buttonArray[i][this.counter].color = "red";
                         switch (i) {
                             case 0:
@@ -504,6 +538,7 @@ class OtherComponent {
                         this.buttonArray[i][this.counter].color = "blue";
                     }
                 }
+                console.log(this.pattern1);
                 this.counter += 1;
                 if (this.counter >= this.sequencerArray[0].length) {
                     this.counter = 0;
@@ -512,7 +547,7 @@ class OtherComponent {
         }, this.interval);
     }
     playAudio() {
-        console.log("Playing Sound");
+        //console.log("Playing Sound");
         let audio = new Audio();
         //Can externalize the variables
         audio.src = "./../../src/assets/kick.wav";
@@ -521,7 +556,7 @@ class OtherComponent {
     }
     toggle(button) {
         this.buttonValue = button.id;
-        console.log(this.buttonValue);
+        // console.log(this.buttonValue);
     }
     /*
     toggle2(event: Event): void {
@@ -538,7 +573,14 @@ class OtherComponent {
     }
 }
 OtherComponent.ɵfac = function OtherComponent_Factory(t) { return new (t || OtherComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_pirate_service__WEBPACK_IMPORTED_MODULE_2__["PirateService"])); };
-OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: OtherComponent, selectors: [["app-other"]], decls: 39, vars: 1, consts: [[1, "container", "p-3", "my-3", "bg-dark", "text-white"], [1, "container", "shadow", "min-vh-50", "py-2"], [1, "row"], [1, "col"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], ["for", "inputsm"], ["id", "inputdefault", "type", "number", "min", "50", "max", "500", 1, "form-control"], ["name", "drumkit", 1, "custom-select-sm"], ["kit", ""], ["value", "rock"], ["value", "electro"], [1, "container"], [4, "ngFor", "ngForOf"], [1, "btn", "btn-outline-secondary"], [1, "note"], [3, "background-color", "class", "id", "click", 4, "ngFor", "ngForOf"], [3, "id", "click"]], template: function OtherComponent_Template(rf, ctx) { if (rf & 1) {
+OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({ type: OtherComponent, selectors: [["app-other"]], viewQuery: function OtherComponent_Query(rf, ctx) { if (rf & 1) {
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c0, true);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵviewQuery"](_c1, true);
+    } if (rf & 2) {
+        let _t;
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.tempo = _t.first);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.input = _t.first);
+    } }, decls: 40, vars: 1, consts: [[1, "container", "p-3", "my-3", "bg-dark", "text-white"], [1, "container", "shadow", "min-vh-50", "py-2"], [1, "row"], [1, "col"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], ["for", "inputsm"], ["id", "inputdefault", "type", "number", "min", "50", "max", "500", "value", "500", 1, "form-control"], ["tem", ""], ["name", "drumkit", 1, "custom-select-sm"], ["kit", ""], ["value", "rock"], ["value", "electro"], [1, "container"], [4, "ngFor", "ngForOf"], [1, "btn", "btn-outline-secondary", 3, "click"], [1, "note"], [3, "background-color", "class", "id", "click", 4, "ngFor", "ngForOf"], [3, "id", "click"]], template: function OtherComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h1");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "LX MIDI TOOLS");
@@ -564,49 +606,52 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "label", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "input", 6);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "input", 6, 7);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](17, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "form");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "select", 7, 8);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](21, "option", 9);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](22, "Rock Drumkit");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "form");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](20, "select", 8, 9);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](22, "option", 10);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](23, "Rock Drumkit");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](23, "option", 10);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](24, "Electronic");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](24, "option", 11);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](25, "Electronic");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](25, "hr");
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](26, "div", 11);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](27, OtherComponent_div_27_Template, 5, 2, "div", 12);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](28, "div", 1);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 2);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "div", 3);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "button", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](32, " Clear ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](33, "button", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](34, " Load ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](26, "hr");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](27, "div", 12);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](28, OtherComponent_div_28_Template, 7, 3, "div", 13);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](35, "button", 13);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](36, " Save ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](29, "div", 1);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](30, "div", 2);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](31, "div", 3);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](32, "button", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_Template_button_click_32_listener() { return ctx.clearPattern(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](33, " Clear ");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](37, "button", 4);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_Template_button_click_37_listener() { return ctx.stopStuff(); });
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](38, "Export");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](34, "button", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_Template_button_click_34_listener() { return ctx.loadPattern(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](35, " Load ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](36, "button", 14);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_Template_button_click_36_listener() { return ctx.changeTempo(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](37, " Save ");
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](38, "button", 4);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function OtherComponent_Template_button_click_38_listener() { return ctx.stopStuff(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](39, "Export");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
     } if (rf & 2) {
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](27);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](28);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.buttonArray);
-    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], styles: [".button[_ngcontent-%COMP%] { background-color: #4CAF50; border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}", ".kick[_ngcontent-%COMP%] { }", ".green[_ngcontent-%COMP%] {background-color: green;}", ".red[_ngcontent-%COMP%] { background-color: red; }", "label.note[_ngcontent-%COMP%] { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: medium; color:white}", "button.btn[_ngcontent-%COMP%]   btn-outline-secondary[_ngcontent-%COMP%] {margin-right: 0.2em}"] });
+    } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_3__["NgForOf"]], styles: [".button[_ngcontent-%COMP%] { background-color: #4CAF50; border: none; color: red; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}", ".kick[_ngcontent-%COMP%] { }", ".green[_ngcontent-%COMP%] {background-color: green;}", ".red[_ngcontent-%COMP%] { background-color: red; }", "label.note[_ngcontent-%COMP%] { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: small; color:white; margin-left: 0.2em}", "button.btn[_ngcontent-%COMP%]   btn-outline-secondary[_ngcontent-%COMP%] {margin-right: 0.2em; }"] });
 /*@__PURE__*/ (function () { _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](OtherComponent, [{
         type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
         args: [{
@@ -631,7 +676,7 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
 <div class="row">
     <div class="col">  
       <label for="inputsm"></label>
-      <input class="form-control" id="inputdefault" type="number" min="50" max="500">
+      <input class="form-control" id="inputdefault" type="number" min="50" max="500" #tem value="500">
     </div>
     <div class="col">  
     <form>
@@ -654,10 +699,10 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
       *ngFor="let step of instrument; let i = index" [style.background-color]="buttonArray[u][i].color"
       (click) = "setStep($event)" class = "{{ step.class }}" 
       id="{{ step.id }}"> 
- 
       {{ step.id +1 }}
       <!--{{ step.id }} - (Index: {{ i }})-->
     </button>
+    <label class="note"> {{ instruments[u] }}</label>
   </div>
   </div>
 </div>
@@ -666,13 +711,13 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
 <div class="container shadow min-vh-50 py-2">
   <div class="row">
       <div class="col">
-          <button class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" (click)="clearPattern()">
               Clear
           </button>
-          <button class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" (click)="loadPattern()">
               Load
           </button>
-          <button class="btn btn-outline-secondary">
+          <button class="btn btn-outline-secondary" (click)="changeTempo()">
               Save
           </button>
           <button type="button" class="btn btn-outline-secondary" (click)="stopStuff()">Export</button>
@@ -682,15 +727,21 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
 
 
   `,
-                styles: ['.button { background-color: #4CAF50; /* Green */border: none; color: white; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}',
+                styles: ['.button { background-color: #4CAF50; /* Green */border: none; color: red; padding: 15px 32px; text-align: center; text-decoration: none; display: inline-block; ont-size: 16px;}',
                     '.kick { }',
                     '.green {background-color: green;}',
                     '.red { background-color: red; }',
-                    'label.note { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: medium; color:white}',
-                    'button.btn btn-outline-secondary {margin-right: 0.2em}'
+                    'label.note { background-color: grey; width: 50px; margin-right: 0.2em; text-align: center; font-size: small; color:white; margin-left: 0.2em}',
+                    'button.btn btn-outline-secondary {margin-right: 0.2em; }'
                 ]
             }]
-    }], function () { return [{ type: _pirate_service__WEBPACK_IMPORTED_MODULE_2__["PirateService"] }]; }, null); })();
+    }], function () { return [{ type: _pirate_service__WEBPACK_IMPORTED_MODULE_2__["PirateService"] }]; }, { tempo: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+            args: ["tem"]
+        }], input: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"],
+            args: ["i"]
+        }] }); })();
 
 
 /***/ }),

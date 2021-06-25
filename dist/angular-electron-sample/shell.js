@@ -2664,7 +2664,7 @@ class Pattern {
 }
 function createWindow() {
     const mainWindow = new electron__WEBPACK_IMPORTED_MODULE_0__["BrowserWindow"]({
-        width: 600,
+        width: 700,
         height: 700,
         webPreferences: {
             nodeIntegration: true
