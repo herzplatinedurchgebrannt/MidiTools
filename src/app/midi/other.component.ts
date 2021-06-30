@@ -27,7 +27,7 @@ import { Howl } from 'howler';
 <div class="row">
     <div class="col">  
       <label for="inputsm"></label>
-      <input class="form-control" id="inputdefault" type="number" min="50" max="500" #tem value="500">
+      <input class="form-control" id="inputdefault" type="number" min="60" max="240" #tem value="120" (change)="changeTempo()">
     </div>
     <div class="col">  
     <form>
@@ -93,8 +93,8 @@ export class OtherComponent implements OnInit {
   @ViewChild ("tem") tempo; 
   @ViewChild ("i") input; 
 
-  private instruments = ["kick","snare","hihat","crash","tom_lo","tom_hi"];
-  private instrumentsMidi = [60, 62, 66, 68, 72, 71];
+  private instruments = ["kick","snare","hihat_cl","hihat_ho","tom_lo","tom_hi","crash_le","crash_ri"];
+  private instrumentsMidi = [60, 62, 66, 68, 72, 71, 73, 74];
   private buttonArray = new Array();
   private sequencerArray = new Array();
 
@@ -103,9 +103,13 @@ export class OtherComponent implements OnInit {
                       [0,0,127,0,127,0,127,0,127,0,127,0,127,0,127,0],
                       [127,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
   private pattern0 = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+                      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
                       [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -114,7 +118,8 @@ export class OtherComponent implements OnInit {
 
 
   loadPattern(){
-    this.sequencerArray = this.pattern1;
+    this.sequencerArray = Array.from(this.pattern1);
+
   }
 
   clearPattern(){
@@ -132,23 +137,35 @@ export class OtherComponent implements OnInit {
   soundHatHaOp = new Howl({ src: ['assets/drums/hihat_ho.wav'], volume: 0.2});
   soundTomLo = new Howl({ src: ['assets/drums/tom_lo.wav'], volume: 0.3});
   soundTomHi = new Howl({ src: ['assets/drums/tom_hi.wav'], volume: 0.3});
-  soundCrashLe = new Howl({ src: ['assets/drums/crash_le.wav'], volume: 0.5});
-  soundCrashRi = new Howl({ src: ['assets/drums/crash_ri.wav'], volume: 0.5});
+  soundCrashLe = new Howl({ src: ['assets/drums/crash_le.wav'], volume: 0.3});
+  soundCrashRi = new Howl({ src: ['assets/drums/crash_ri.wav'], volume: 0.3});
 
   buttonValue: string;
 
+  /*
   toggle5 = true;
-  status = 'Enable'; 
+  status = 'Enable'; */
   
   constructor ( private pirateService: PirateService ) 
   { 
     this.addList(this.instruments);
-    this.interval = 200;
+    this.interval = 125;
   }
 
   changeTempo(){
-    this.interval = this.tempo.nativeElement.value;
-    console.log(this.interval);
+    // calculate interval time of bpm
+    this.interval = this.calculateBpm(this.tempo.nativeElement.value);
+    // quick and dirty, sequencer starts after changing tempo
+    this.stopStuff();
+    this.startSequencer();
+  }
+
+  calculateBpm (bpm: number): number
+  {
+    // 120 bpm 1 beat = 500 ms
+    // 120 bp60s = 2 bps = 500 ms
+    // 0.5 s 
+    return 60000/(bpm*4);    
   }
 
   // build button + sequencer arrays
@@ -174,7 +191,7 @@ export class OtherComponent implements OnInit {
       this.buttonArray[j] = buttonSubArray;
       this.sequencerArray[j] = sequencerSubArray;
     }
-    console.log(this.sequencerArray);
+    //console.log(this.sequencerArray);
   }
 
   
@@ -200,10 +217,16 @@ export class OtherComponent implements OnInit {
       this.buttonArray[row][button.id].color = "grey";
     }
 
+    console.log("sequencer");
+    console.log(this.sequencerArray);
+    console.log("button");
+    console.log(this.buttonArray);
 
 
+
+    /*
     this.toggle5 = !this.toggle5;
-    this.status = this.toggle5 ? 'Enable' : 'Disable';
+    this.status = this.toggle5 ? 'Enable' : 'Disable';*/
 
 
     // delete next line!!
@@ -213,13 +236,14 @@ export class OtherComponent implements OnInit {
 
  }
 
+ timer: any;
+
   stopStuff(){
     clearInterval(this.timer);
     //console.log(this.tempo.nativeElement.value);
   }
 
 
-  timer: any;
 
   startSequencer()
   {
@@ -234,18 +258,21 @@ export class OtherComponent implements OnInit {
         if (this.isPlaying == true)
           {
 
+            console.log(this.sequencerArray[0][15]);
+
+
             for (let i = 0; i < this.sequencerArray.length; i++){
               //console.log(i)
 
               if (this.counter == 0)
               {
-                if (this.sequencerArray[i][this.sequencerArray.length-1] == 127)
+                if (this.sequencerArray[i][15] == 127)
                 {
-                  this.buttonArray[i][this.sequencerArray[i].length-1].color = "grey";
+                  this.buttonArray[i][15].color = "grey";
                 }
                 else
                 {
-                  this.buttonArray[i][this.sequencerArray[i].length-1].color = "white";
+                  this.buttonArray[i][15].color = "white";
                 }
               }
               else if (this.counter != 0)
@@ -285,6 +312,9 @@ export class OtherComponent implements OnInit {
                   case 6:
                     this.soundCrashLe.play();
                   break;
+                  case 7:
+                    this.soundCrashRi.play();
+                  break;
                 
                   default:
                     break;
@@ -297,7 +327,7 @@ export class OtherComponent implements OnInit {
 
             }
 
-            console.log(this.pattern1);
+            //console.log(this.pattern1);
             this.counter += 1;
 
             if (this.counter >= this.sequencerArray[0].length){

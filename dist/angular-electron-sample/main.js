@@ -392,10 +392,13 @@ function OtherComponent_div_28_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate1"](" ", ctx_r2.instruments[u_r4], "");
 } }
 class OtherComponent {
+    /*
+    toggle5 = true;
+    status = 'Enable'; */
     constructor(pirateService) {
         this.pirateService = pirateService;
-        this.instruments = ["kick", "snare", "hihat", "crash", "tom_lo", "tom_hi"];
-        this.instrumentsMidi = [60, 62, 66, 68, 72, 71];
+        this.instruments = ["kick", "snare", "hihat_cl", "hihat_ho", "tom_lo", "tom_hi", "crash_le", "crash_ri"];
+        this.instrumentsMidi = [60, 62, 66, 68, 72, 71, 73, 74];
         this.buttonArray = new Array();
         this.sequencerArray = new Array();
         this.pattern1 = [[127, 0, 0, 0, 127, 0, 0, 0, 127, 0, 0, 0, 127, 0, 0, 0],
@@ -403,8 +406,12 @@ class OtherComponent {
             [0, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0, 127, 0],
             [127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]];
         this.pattern0 = [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -418,23 +425,30 @@ class OtherComponent {
         this.soundHatHaOp = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/hihat_ho.wav'], volume: 0.2 });
         this.soundTomLo = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/tom_lo.wav'], volume: 0.3 });
         this.soundTomHi = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/tom_hi.wav'], volume: 0.3 });
-        this.soundCrashLe = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/crash_le.wav'], volume: 0.5 });
-        this.soundCrashRi = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/crash_ri.wav'], volume: 0.5 });
-        this.toggle5 = true;
-        this.status = 'Enable';
+        this.soundCrashLe = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/crash_le.wav'], volume: 0.3 });
+        this.soundCrashRi = new howler__WEBPACK_IMPORTED_MODULE_1__["Howl"]({ src: ['assets/drums/crash_ri.wav'], volume: 0.3 });
         this.addList(this.instruments);
-        this.interval = 200;
+        this.interval = 125;
     }
     loadPattern() {
-        this.sequencerArray = this.pattern1;
+        this.sequencerArray = Array.from(this.pattern1);
     }
     clearPattern() {
         //this.addList(this.instruments);
         this.sequencerArray = this.pattern0;
     }
     changeTempo() {
-        this.interval = this.tempo.nativeElement.value;
-        console.log(this.interval);
+        // calculate interval time of bpm
+        this.interval = this.calculateBpm(this.tempo.nativeElement.value);
+        // quick and dirty, sequencer starts after changing tempo
+        this.stopStuff();
+        this.startSequencer();
+    }
+    calculateBpm(bpm) {
+        // 120 bpm 1 beat = 500 ms
+        // 120 bp60s = 2 bps = 500 ms
+        // 0.5 s 
+        return 60000 / (bpm * 4);
     }
     // build button + sequencer arrays
     addList(instruments) {
@@ -454,7 +468,7 @@ class OtherComponent {
             this.buttonArray[j] = buttonSubArray;
             this.sequencerArray[j] = sequencerSubArray;
         }
-        console.log(this.sequencerArray);
+        //console.log(this.sequencerArray);
     }
     setStep(event) {
         const button = event.target;
@@ -472,8 +486,13 @@ class OtherComponent {
             this.buttonArray[row][button.id].stepActive = true;
             this.buttonArray[row][button.id].color = "grey";
         }
+        console.log("sequencer");
+        console.log(this.sequencerArray);
+        console.log("button");
+        console.log(this.buttonArray);
+        /*
         this.toggle5 = !this.toggle5;
-        this.status = this.toggle5 ? 'Enable' : 'Disable';
+        this.status = this.toggle5 ? 'Enable' : 'Disable';*/
         // delete next line!!
         //this.sequencerArray = this.pattern1;
         //console.log(this.sequencerArray);
@@ -488,14 +507,15 @@ class OtherComponent {
         this.counter = 0;
         this.timer = setInterval(() => {
             if (this.isPlaying == true) {
+                console.log(this.sequencerArray[0][15]);
                 for (let i = 0; i < this.sequencerArray.length; i++) {
                     //console.log(i)
                     if (this.counter == 0) {
-                        if (this.sequencerArray[i][this.sequencerArray.length - 1] == 127) {
-                            this.buttonArray[i][this.sequencerArray[i].length - 1].color = "grey";
+                        if (this.sequencerArray[i][15] == 127) {
+                            this.buttonArray[i][15].color = "grey";
                         }
                         else {
-                            this.buttonArray[i][this.sequencerArray[i].length - 1].color = "white";
+                            this.buttonArray[i][15].color = "white";
                         }
                     }
                     else if (this.counter != 0) {
@@ -530,6 +550,9 @@ class OtherComponent {
                             case 6:
                                 this.soundCrashLe.play();
                                 break;
+                            case 7:
+                                this.soundCrashRi.play();
+                                break;
                             default:
                                 break;
                         }
@@ -538,7 +561,7 @@ class OtherComponent {
                         this.buttonArray[i][this.counter].color = "blue";
                     }
                 }
-                console.log(this.pattern1);
+                //console.log(this.pattern1);
                 this.counter += 1;
                 if (this.counter >= this.sequencerArray[0].length) {
                     this.counter = 0;
@@ -580,7 +603,7 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         let _t;
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.tempo = _t.first);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵqueryRefresh"](_t = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵloadQuery"]()) && (ctx.input = _t.first);
-    } }, decls: 40, vars: 1, consts: [[1, "container", "p-3", "my-3", "bg-dark", "text-white"], [1, "container", "shadow", "min-vh-50", "py-2"], [1, "row"], [1, "col"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], ["for", "inputsm"], ["id", "inputdefault", "type", "number", "min", "50", "max", "500", "value", "500", 1, "form-control"], ["tem", ""], ["name", "drumkit", 1, "custom-select-sm"], ["kit", ""], ["value", "rock"], ["value", "electro"], [1, "container"], [4, "ngFor", "ngForOf"], [1, "btn", "btn-outline-secondary", 3, "click"], [1, "note"], [3, "background-color", "class", "id", "click", 4, "ngFor", "ngForOf"], [3, "id", "click"]], template: function OtherComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, decls: 40, vars: 1, consts: [[1, "container", "p-3", "my-3", "bg-dark", "text-white"], [1, "container", "shadow", "min-vh-50", "py-2"], [1, "row"], [1, "col"], ["type", "button", 1, "btn", "btn-outline-secondary", 3, "click"], ["for", "inputsm"], ["id", "inputdefault", "type", "number", "min", "60", "max", "240", "value", "120", 1, "form-control", 3, "change"], ["tem", ""], ["name", "drumkit", 1, "custom-select-sm"], ["kit", ""], ["value", "rock"], ["value", "electro"], [1, "container"], [4, "ngFor", "ngForOf"], [1, "btn", "btn-outline-secondary", 3, "click"], [1, "note"], [3, "background-color", "class", "id", "click", 4, "ngFor", "ngForOf"], [3, "id", "click"]], template: function OtherComponent_Template(rf, ctx) { if (rf & 1) {
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "div", 0);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "h1");
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](2, "LX MIDI TOOLS");
@@ -606,7 +629,9 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](13, "div", 2);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](14, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](15, "label", 5);
-        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelement"](16, "input", 6, 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](16, "input", 6, 7);
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("change", function OtherComponent_Template_input_change_16_listener() { return ctx.changeTempo(); });
+        _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](18, "div", 3);
         _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](19, "form");
@@ -676,7 +701,7 @@ OtherComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineCom
 <div class="row">
     <div class="col">  
       <label for="inputsm"></label>
-      <input class="form-control" id="inputdefault" type="number" min="50" max="500" #tem value="500">
+      <input class="form-control" id="inputdefault" type="number" min="60" max="240" #tem value="120" (change)="changeTempo()">
     </div>
     <div class="col">  
     <form>
