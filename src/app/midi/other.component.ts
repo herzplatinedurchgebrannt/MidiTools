@@ -95,7 +95,7 @@ export class OtherComponent implements OnInit {
 
   private instruments = ["kick","snare","hihat_cl","hihat_ho","tom_lo","tom_hi","crash_le","crash_ri"];
   private instrumentsMidi = [60, 62, 66, 68, 72, 71, 73, 74];
-  private buttonArray = new Array();
+  public buttonArray = new Array();
   private sequencerArray = new Array();
 
   private pattern1 = [[127,0,0,0,127,0,0,0,127,0,0,0,127,0,0,0],
