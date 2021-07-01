@@ -21,7 +21,7 @@ import { PirateLocalService } from '../pirate-local.service';
     </div>
     <div class="col-sm-3">  
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" #sort checked (change)="function1($event)">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" #sort checked>
         <label class="
         form-check-label" for="flexCheckChecked">
            Sort pattern
